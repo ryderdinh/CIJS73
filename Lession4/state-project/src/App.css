@@ -1,0 +1,25 @@
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.btn-box {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background: #61dafb;
+}
+.value {
+  font-size: 25px;
+  font-weight: bold;
+}
