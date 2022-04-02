@@ -30,10 +30,37 @@ function App() {
     ]);
   };
 
+  const removeTask = (id) => {
+    const newTodoList = todoList.filter((item) => {
+      return item.id !== id;
+    });
+
+    setTodoList(newTodoList);
+  };
+
+  const editTask = (id, newData) => {
+    const newTodoList = todoList.map((item) => {
+      let newItem = item;
+
+      if (newItem.id === id) {
+        newItem = { ...newItem, text: newData };
+      }
+
+      return newItem;
+    });
+
+    setTodoList(newTodoList);
+  };
+
   return (
     <div className='App'>
       <FormInput onSubmit={addTodo} />
-      <TodoList todoData={todoList} handleInputClick={handleInputClick} />
+      <TodoList
+        todoData={todoList}
+        handleInputClick={handleInputClick}
+        removeTask={removeTask}
+        editTask={editTask}
+      />
       <div className='task-list'>{countTaskLeft()}</div>
     </div>
   );

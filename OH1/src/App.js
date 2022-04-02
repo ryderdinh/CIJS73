@@ -1,49 +1,67 @@
-import { useState } from "react";
-import Expenses from "./components/expenses";
-import Form from "./components/form";
-import "./App.css";
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import FormInput from './components/FormInput';
+import TodoList from './components/TodoList';
+import './style.css';
 
 function App() {
-  const [expenseItems, setExpenseItems] = useState([
-    {
-      id: Math.random() * 1000000,
-      date: new Date("2020-02-11"),
-      title: "New Phone",
-      amount: 800,
-      important: true,
-    },
-    {
-      id: Math.random() * 1000000,
-      date: new Date("2021-03-20"),
-      title: "House Improvement",
-      amount: 1000,
-    },
-    {
-      id: Math.random() * 1000000,
-      date: new Date("2022-05-01"),
-      title: "Electricity Bill",
-      amount: 500,
-    },
-  ]);
+  const [todoList, setTodoList] = useState([]);
 
-  const handleAddExpense = (formValue) => {
-    setExpenseItems((prev) => {
-      return [
-        ...prev,
-        {
-          id: Math.random() * 1000000,
-          date: new Date(formValue.date),
-          title: formValue.title,
-          amount: Number(formValue.amount),
-        },
-      ];
+  const countTaskLeft = () => {
+    let countList = todoList.filter((item) => item.done === false).length;
+    return countList;
+  };
+
+  const handleInputClick = (newTask, index) => {
+    const newTodoList = [...todoList];
+    newTodoList[index] = newTask;
+
+    setTodoList(newTodoList);
+  };
+
+  const addTodo = (text) => {
+    setTodoList([
+      ...todoList,
+      {
+        id: uuidv4(),
+        done: false,
+        text
+      }
+    ]);
+  };
+
+  const removeTask = (id) => {
+    const newTodoList = todoList.filter((item) => {
+      return item.id !== id;
     });
+
+    setTodoList(newTodoList);
+  };
+
+  const editTask = (id, newData) => {
+    const newTodoList = todoList.map((item) => {
+      let newItem = item;
+
+      if (newItem.id === id) {
+        newItem = { ...newItem, text: newData };
+      }
+
+      return newItem;
+    });
+
+    setTodoList(newTodoList);
   };
 
   return (
-    <div>
-      <Form onSubmit={handleAddExpense} />
-      <Expenses expenseItems={expenseItems} />
+    <div className='App'>
+      <FormInput onSubmit={addTodo} />
+      <TodoList
+        todoData={todoList}
+        handleInputClick={handleInputClick}
+        removeTask={removeTask}
+        editTask={editTask}
+      />
+      <div className='task-list'>{countTaskLeft()}</div>
     </div>
   );
 }
