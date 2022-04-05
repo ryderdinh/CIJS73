@@ -26,7 +26,7 @@ export default TodoList;
 function TodoItem(props) {
   const { dataItem, index } = props;
   const [edit, setEdit] = useState(false);
-  const [newData, setNewData] = useState(dataItem.text);
+  const [newData, setNewData] = useState(dataItem.title);
 
   const handleTextariaChange = (e) => {
     setNewData(e.target.value);
@@ -40,8 +40,8 @@ function TodoItem(props) {
           !edit &&
             props.handleInputClick(
               {
-                text: dataItem['text'],
-                done: !dataItem.done
+                title: dataItem['title'],
+                completed: !dataItem.done
               },
               index
             );
@@ -58,7 +58,10 @@ function TodoItem(props) {
             />
           </span>
         ) : (
-          <span>{dataItem['text']}</span>
+          <span>
+            {`${index + 1}. `}
+            {dataItem['title']}
+          </span>
         )}
       </div>
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import FormInput from './components/FormInput';
 import TodoList from './components/TodoList';
@@ -8,7 +8,7 @@ function App() {
   const [todoList, setTodoList] = useState([]);
 
   const countTaskLeft = () => {
-    let countList = todoList.filter((item) => item.done === false).length;
+    let countList = todoList.filter((item) => item.completed === false).length;
     return countList;
   };
 
@@ -24,8 +24,8 @@ function App() {
       ...todoList,
       {
         id: uuidv4(),
-        done: false,
-        text
+        completed: false,
+        title: text
       }
     ]);
   };
@@ -43,7 +43,7 @@ function App() {
       let newItem = item;
 
       if (newItem.id === id) {
-        newItem = { ...newItem, text: newData };
+        newItem = { ...newItem, title: newData };
       }
 
       return newItem;
@@ -51,6 +51,15 @@ function App() {
 
     setTodoList(newTodoList);
   };
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        setTodoList(json);
+      });
+  }, []);
 
   return (
     <div className='App'>
