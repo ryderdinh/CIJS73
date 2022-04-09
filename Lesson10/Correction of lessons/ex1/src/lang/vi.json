@@ -1,0 +1,15 @@
+{
+  "Global": {
+    "login-btn": "Đăng nhập"
+  },
+  "SigninComponent": {
+    "username": "Tài khoản",
+    "input-placeholder-user": "Nhập tên tài khoản..."
+  },
+  "HeaderComponent": {
+    "welcome": "Chào mừng"
+  },
+  "MainComponent": {
+    "welcome": "Chào mừng đến với 😂😂"
+  }
+}

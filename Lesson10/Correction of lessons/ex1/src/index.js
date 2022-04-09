@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
-import { ThemeProvider } from './context/ThemeContext';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <LanguageProvider>
+    <LanguageProvider>
+      <AuthProvider>
         <App />
-      </LanguageProvider>
-    </ThemeProvider>
+      </AuthProvider>
+    </LanguageProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

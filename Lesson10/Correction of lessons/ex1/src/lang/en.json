@@ -1,0 +1,15 @@
+{
+  "Global": {
+    "login-btn": "Login"
+  },
+  "SigninComponent": {
+    "username": "Username",
+    "input-placeholder-user": "Enter username..."
+  },
+  "HeaderComponent": {
+    "welcome": "Welcome"
+  },
+  "MainComponent": {
+    "welcome": "Welcome to 😂😂"
+  }
+}
