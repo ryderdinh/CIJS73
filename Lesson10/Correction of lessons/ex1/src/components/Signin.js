@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react';
 import '../assets/css/Signin.css';
 import { AuthContext } from '../context/AuthContext';
-import { LanguageContext } from '../context/LanguageContext';
+import { useTranlate } from '../hooks';
 
 function Signin() {
   const { signin } = useContext(AuthContext);
-  const { dictionary } = useContext(LanguageContext);
+  const { dictionary } = useTranlate('SigninComponent');
+
   const [username, setUsername] = useState('');
 
   const handleSubmitForm = (e) => {
@@ -17,11 +18,11 @@ function Signin() {
     <form onSubmit={handleSubmitForm}>
       <div className='container'>
         <label for='uname'>
-          <b>{dictionary('SigninComponent', 'username')}</b>
+          <b>{dictionary('username')}</b>
         </label>
         <input
           type='text'
-          placeholder={dictionary('SigninComponent', 'input-placeholder-user')}
+          placeholder={dictionary('input-placeholder-user')}
           required
           value={username}
           onChange={(e) => {
@@ -29,7 +30,7 @@ function Signin() {
           }}
         />
 
-        <button type='submit'>{dictionary('Global', 'login-btn')}</button>
+        <button type='submit'>{'Sign In'}</button>
       </div>
     </form>
   );

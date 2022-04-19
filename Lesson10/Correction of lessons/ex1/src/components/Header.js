@@ -1,11 +1,13 @@
 import { useContext } from 'react';
 import '../assets/css/Header.css';
 import { AuthContext } from '../context/AuthContext';
-import { LanguageContext } from '../context/LanguageContext';
+import { useTranlate } from '../hooks/index';
 
 function Header() {
   const { auth, userName } = useContext(AuthContext);
-  const { dictionary } = useContext(LanguageContext);
+  // const { dictionary } = useContext(LanguageContext);
+
+  const { dictionary } = useTranlate('HeaderComponent');
 
   return (
     <header>
@@ -15,10 +17,10 @@ function Header() {
         {auth ? (
           <div className='action-item'>
             {/* Welcome,.... */}
-            {dictionary('HeaderComponent', 'welcome')}, {userName}
+            {dictionary('welcome')}, {userName}
           </div>
         ) : (
-          <div className='action-item'>{dictionary('Global', 'login-btn')}</div> //Login
+          <div className='action-item'>{'a'}</div> //Login
         )}
       </div>
     </header>
